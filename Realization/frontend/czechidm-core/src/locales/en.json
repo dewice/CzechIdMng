@@ -6311,11 +6311,15 @@
     },
     "FORM_DEFINITION_DELETE_FAILED_SYSTEM_DEFINITION": {
       "title": "Form definition can not be deleted",
-      "message": "Definition [{{name}}] it can't be deleted, because is flagged as system."
+      "message": "Definition [{{name}}] can't be deleted, because it is flagged as system."
     },
     "FORM_ATTRIBUTE_DELETE_FAILED_SYSTEM_ATTRIBUTE": {
       "title": "Attribute definition can not be deleted",
       "message": "Attribute [{{name}}] it can't be deleted, because is flagged as system."
+    },
+    "FORM_DEFINITION_DELETE_FAILED_MAIN_FORM": {
+      "title": "Form definition can not be deleted",
+      "message": "Definition [{{code}}] can't be deleted, because it is flagged as main. Flag another definition as main before its deletion."
     },
     "FORM_ATTRIBUTE_DELETE_FAILED_HAS_VALUES": {
       "title": "Form attribute can not be deleted",

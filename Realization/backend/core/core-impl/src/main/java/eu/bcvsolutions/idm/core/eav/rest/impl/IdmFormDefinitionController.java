@@ -326,6 +326,9 @@ public class IdmFormDefinitionController extends AbstractReadWriteDtoController<
 		if (entity.isUnmodifiable()) {
 			throw new ResultCodeException(CoreResultCode.FORM_DEFINITION_DELETE_FAILED_SYSTEM_DEFINITION, ImmutableMap.of("code", entity.getCode()));
 		}
+		if (entity.isMain()) {
+			throw new ResultCodeException(CoreResultCode.FORM_DEFINITION_DELETE_FAILED_MAIN_FORM, ImmutableMap.of("code", entity.getCode()));
+		}
 		super.deleteDto(entity);
 	}
 	

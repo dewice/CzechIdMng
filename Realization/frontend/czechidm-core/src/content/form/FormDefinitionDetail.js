@@ -147,6 +147,7 @@ class FormDefinitionDetail extends Basic.AbstractContent {
                 helpBlock={ this.i18n('entity.FormDefinition.module.help') }/>
               <Basic.Checkbox
                 ref="main"
+                readOnly = {entity ? entity.main: false}
                 label={this.i18n('entity.FormDefinition.main.label')}
                 helpBlock={this.i18n('entity.FormDefinition.main.help')}/>
               <Basic.Checkbox

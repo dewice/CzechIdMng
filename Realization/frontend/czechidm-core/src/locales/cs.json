@@ -6362,12 +6362,16 @@
       "message": "Šablona notifikací [{{template}}] musí být nejprve odstraněna z [{{usage}}] notifikací."
     },
     "FORM_DEFINITION_DELETE_FAILED_SYSTEM_DEFINITION": {
-      "title": "Definice formuláře nelze smazat",
-      "message": "Definice [{{name}}] nelze smazat, protože je označená jako systémová."
+      "title": "Definici formuláře nelze smazat",
+      "message": "Definici [{{name}}] nelze smazat, protože je označená jako systémová."
     },
     "FORM_ATTRIBUTE_DELETE_FAILED_SYSTEM_ATTRIBUTE": {
       "title": "Atribut formuláře nelze smazat",
       "message": "Atribut [{{name}}] nelze smazat, protože je označený jako systémový."
+    },
+    "FORM_DEFINITION_DELETE_FAILED_MAIN_FORM": {
+      "title": "Definici formuláře nelze smazat",
+      "message": "Definici [{{code}}] nelze smazat, protože je označena jako hlavní. Označte nejprve jinou definici jako hlavní."
     },
     "FORM_ATTRIBUTE_DELETE_FAILED_HAS_VALUES": {
       "title": "Atribut formuláře nelze smazat",
