@@ -234,7 +234,7 @@ public class DefaultSysRoleSystemService
 		roleSystemAttributeFilter.setRoleSystemId(id);
 		List<SysRoleSystemAttributeDto> roleSystemAttributes = roleSystemAttributeService.find(roleSystemAttributeFilter, null).getContent();
 		if (roleSystemAttributes.isEmpty()) {
-			roleSystemAttributeService.export(UUID.fromString(ExportManager.BLANK_UUID), batch);
+			roleSystemAttributeService.export(ExportManager.BLANK_UUID, batch);
 		}
 		roleSystemAttributes.forEach(roleSystemAttribute -> {
 			roleSystemAttributeService.export(roleSystemAttribute.getId(), batch);

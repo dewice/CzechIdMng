@@ -3,7 +3,6 @@ package eu.bcvsolutions.idm.core.bulk.action.impl.role;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
@@ -89,7 +88,7 @@ public class RoleExportBulkAction extends AbstractExportBulkAction<IdmRoleDto, I
 		// Export role
 		roleService.export(role.getId(), this.getBatch());
 		// Export EAVs
-		this.exportEAVs(role);
+		this.exportEavs(role);
 		// Export business-roles
 		this.exportBusinessRoles(role);
 		// Export incompatible-roles
@@ -111,9 +110,9 @@ public class RoleExportBulkAction extends AbstractExportBulkAction<IdmRoleDto, I
 	 * 
 	 * @param role
 	 */
-	private void exportEAVs(IdmRoleDto role) {
+	private void exportEavs(IdmRoleDto role) {
 		this.getFormService()//
-				.getDefinitions(IdmRoleDto.class, IdmBasePermission.READ)//
+				.getDefinitions(IdmRoleDto.class)//
 				.forEach(definition -> {
 					// Export EAV definition
 					this.getFormDefinitionService().export(definition.getId(), this.getBatch());
@@ -137,7 +136,7 @@ public class RoleExportBulkAction extends AbstractExportBulkAction<IdmRoleDto, I
 		List<IdmIncompatibleRoleDto> incompatibles = incompatibleRoleService.find(incompatibleFilter, null)
 				.getContent();
 		if (incompatibles.isEmpty()) {
-			incompatibleRoleService.export(UUID.fromString(ExportManager.BLANK_UUID), this.getBatch());
+			incompatibleRoleService.export(ExportManager.BLANK_UUID, this.getBatch());
 		}
 		incompatibles.forEach(incompatible -> {
 			incompatibleRoleService.export(incompatible.getId(), this.getBatch());
@@ -162,7 +161,7 @@ public class RoleExportBulkAction extends AbstractExportBulkAction<IdmRoleDto, I
 		compositionFilter.setRoleId(role.getId());
 		List<IdmRoleCompositionDto> compositions = roleCompositionService.find(compositionFilter, null).getContent();
 		if (compositions.isEmpty()) {
-			roleCompositionService.export(UUID.fromString(ExportManager.BLANK_UUID), this.getBatch());
+			roleCompositionService.export(ExportManager.BLANK_UUID, this.getBatch());
 		}
 		compositions.forEach(composition -> {
 			roleCompositionService.export(composition.getId(), this.getBatch());
@@ -186,7 +185,7 @@ public class RoleExportBulkAction extends AbstractExportBulkAction<IdmRoleDto, I
 		filter.setRole(role.getId());
 		List<IdmRoleGuaranteeDto> dtos = roleGuaranteeService.find(filter, null).getContent();
 		if (dtos.isEmpty()) {
-			roleGuaranteeService.export(UUID.fromString(ExportManager.BLANK_UUID), this.getBatch());
+			roleGuaranteeService.export(ExportManager.BLANK_UUID, this.getBatch());
 		}
 		dtos.forEach(dto -> {
 			roleGuaranteeService.export(dto.getId(), this.getBatch());
@@ -206,7 +205,7 @@ public class RoleExportBulkAction extends AbstractExportBulkAction<IdmRoleDto, I
 		filter.setRole(role.getId());
 		List<IdmRoleGuaranteeRoleDto> dtos = roleGuaranteeRoleService.find(filter, null).getContent();
 		if (dtos.isEmpty()) {
-			roleGuaranteeRoleService.export(UUID.fromString(ExportManager.BLANK_UUID), this.getBatch());
+			roleGuaranteeRoleService.export(ExportManager.BLANK_UUID, this.getBatch());
 		}
 		dtos.forEach(dto -> {
 			roleGuaranteeRoleService.export(dto.getId(), this.getBatch());
@@ -227,7 +226,7 @@ public class RoleExportBulkAction extends AbstractExportBulkAction<IdmRoleDto, I
 
 		List<IdmAuthorizationPolicyDto> dtos = authorizationPolicyService.find(filter, null).getContent();
 		if (dtos.isEmpty()) {
-			authorizationPolicyService.export(UUID.fromString(ExportManager.BLANK_UUID), this.getBatch());
+			authorizationPolicyService.export(ExportManager.BLANK_UUID, this.getBatch());
 		}
 		dtos.forEach(dto -> {
 			authorizationPolicyService.export(dto.getId(), this.getBatch());
@@ -248,7 +247,7 @@ public class RoleExportBulkAction extends AbstractExportBulkAction<IdmRoleDto, I
 
 		List<IdmRoleCatalogueRoleDto> dtos = roleCatalogueRoleService.find(filter, null).getContent();
 		if (dtos.isEmpty()) {
-			roleCatalogueRoleService.export(UUID.fromString(ExportManager.BLANK_UUID), this.getBatch());
+			roleCatalogueRoleService.export(ExportManager.BLANK_UUID, this.getBatch());
 		}
 		dtos.forEach(dto -> {
 			roleCatalogueRoleService.export(dto.getId(), this.getBatch());
@@ -284,7 +283,7 @@ public class RoleExportBulkAction extends AbstractExportBulkAction<IdmRoleDto, I
 
 		List<IdmRoleFormAttributeDto> dtos = roleFormAttributeService.find(filter, null).getContent();
 		if (dtos.isEmpty()) {
-			roleFormAttributeService.export(UUID.fromString(ExportManager.BLANK_UUID), this.getBatch());
+			roleFormAttributeService.export(ExportManager.BLANK_UUID, this.getBatch());
 		}
 		dtos.forEach(dto -> {
 			roleFormAttributeService.export(dto.getId(), this.getBatch());

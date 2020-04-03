@@ -69,6 +69,7 @@ import eu.bcvsolutions.idm.core.api.dto.ResolvedIncompatibleRoleDto;
 import eu.bcvsolutions.idm.core.api.dto.ResultModels;
 import eu.bcvsolutions.idm.core.api.dto.filter.IdmIdentityFilter;
 import eu.bcvsolutions.idm.core.api.dto.filter.IdmIdentityRoleFilter;
+import eu.bcvsolutions.idm.core.api.dto.filter.IdmProfileFilter;
 import eu.bcvsolutions.idm.core.api.dto.filter.IdmRoleRequestFilter;
 import eu.bcvsolutions.idm.core.api.exception.EntityNotFoundException;
 import eu.bcvsolutions.idm.core.api.exception.ForbiddenEntityException;
@@ -1095,8 +1096,12 @@ public class IdmIdentityController extends AbstractEventableDtoController<IdmIde
 		IdmProfileDto profile = profileService.findOrCreateByIdentity(backendId, IdmBasePermission.READ, IdmBasePermission.CREATE);
 		//
 		profile = profileService.uploadImage(profile, data, fileName, IdmBasePermission.UPDATE);
-		// refresh
-		return profileController.get(profile.getId().toString());
+		// refresh with permissions are needed
+		IdmProfileFilter context = new IdmProfileFilter();
+		context.setAddPermissions(true);
+		profile = profileController.getService().get(profile, context, IdmBasePermission.READ);
+		//
+		return new ResponseEntity<>(profileController.toResource(profile), HttpStatus.OK);
 	}
 	
 	/**
@@ -1125,8 +1130,12 @@ public class IdmIdentityController extends AbstractEventableDtoController<IdmIde
 		IdmProfileDto profile = profileService.findOneByIdentity(backendId, IdmBasePermission.READ, IdmBasePermission.UPDATE);
 		//
 		profile = profileService.deleteImage(profile, IdmBasePermission.UPDATE);
-		// refresh
-		return profileController.get(profile.getId().toString());
+		// refresh with permissions are needed
+		IdmProfileFilter context = new IdmProfileFilter();
+		context.setAddPermissions(true);
+		profile = profileController.getService().get(profile, context, IdmBasePermission.READ);
+		//
+		return new ResponseEntity<>(profileController.toResource(profile), HttpStatus.OK);
 	}
 	
 	/**

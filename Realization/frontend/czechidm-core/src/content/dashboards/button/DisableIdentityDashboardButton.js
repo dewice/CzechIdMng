@@ -63,12 +63,9 @@ class DisableIdentityDashboardButton extends Advanced.AbstractIdentityDashboardB
     });
   }
 
-  renderContent() {
+  renderConfirm() {
     return (
-      <span>
-        { super.renderContent() }
-        <Basic.Confirm ref="confirm-disable" level="danger" />
-      </span>
+      <Basic.Confirm ref="confirm-disable" level="danger" />
     );
   }
 

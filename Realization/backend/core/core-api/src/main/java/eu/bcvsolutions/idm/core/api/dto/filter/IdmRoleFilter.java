@@ -134,20 +134,4 @@ public class IdmRoleFilter
 	public void setParent(UUID parent) {
 		set(PARAMETER_PARENT, parent);
 	}
-
-	/**
-	 * @since 10.2.0
-	 */
-	@Override
-	public Boolean getAddEavMetadata() {
-    	return getParameterConverter().toBoolean(data, PARAMETER_ADD_EAV_METADATA);
-	}
-
-	/**
-	 * @since 10.2.0
-	 */
-	@Override
-	public void setAddEavMetadata(Boolean value) {
-		data.set(PARAMETER_ADD_EAV_METADATA, value);
-	}
 }

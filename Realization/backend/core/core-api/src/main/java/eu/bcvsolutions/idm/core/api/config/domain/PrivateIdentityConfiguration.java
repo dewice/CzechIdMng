@@ -16,6 +16,7 @@ public interface PrivateIdentityConfiguration extends Configurable {
 
 	/**
 	 * Supports authorization policies for extended form definitions and their values
+	 * @deprecated @since 10.2.0 secured attributes will be supported only
 	 */
 	String PROPERTY_IDENTITY_FORM_ATTRIBUTES_SECURED = 
 			ConfigurationService.IDM_PRIVATE_PROPERTY_PREFIX + "core.identity.formAttributes.secured";
@@ -54,6 +55,7 @@ public interface PrivateIdentityConfiguration extends Configurable {
 	 * Returns true, when supports authorization policies for extended form definitions and their values
 	 * 
 	 * @return
+	 * @deprecated @since 10.2.0 secured attributes will be supported only, this configuration will be removed
 	 */
 	boolean isFormAttributesSecured();
 	

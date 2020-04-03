@@ -3,8 +3,6 @@ package eu.bcvsolutions.idm.acc.service.api;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import eu.bcvsolutions.idm.acc.dto.SysSchemaObjectClassDto;
 import eu.bcvsolutions.idm.acc.dto.SysSystemDto;
 import eu.bcvsolutions.idm.acc.dto.filter.SysSystemFilter;
@@ -114,7 +112,6 @@ public interface SysSystemService extends
 	 */
 	IcConnectorObject readConnectorObject(UUID systemId, String uid, IcObjectClass objectClass);
 
-	@Transactional
 	IdmFormDefinitionDto getOperationOptionsConnectorFormDefinition(IcConnectorInstance connectorInstance);
 
 	/**

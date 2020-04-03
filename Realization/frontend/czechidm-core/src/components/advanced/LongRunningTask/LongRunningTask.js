@@ -200,13 +200,12 @@ class LongRunningTask extends Basic.AbstractContent {
       }
 
       return (
-        <div style={{ marginTop: '15px', marginLeft: '30px' }}>
-          <EntityInfo
-            entityType={Utils.Ui.getSimpleJavaType(parameters.ownerType)}
-            entityIdentifier={parameters.ownerId}
-            showDefaultEntityInfo={false}
-            face="full" />
-        </div>
+        <EntityInfo
+          entityType={ Utils.Ui.getSimpleJavaType(parameters.ownerType) }
+          entityIdentifier={ parameters.ownerId }
+          showDefaultEntityInfo={ false }
+          face="full"
+          style={{ maxWidth: '100%', marginTop: 15, marginBottom: 0 }}/>
       );
     }
     return null;

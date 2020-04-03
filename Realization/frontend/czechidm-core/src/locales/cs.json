@@ -6723,7 +6723,7 @@
     },
     "ATTACHMENT_SIZE_LIMIT_EXCEEDED": {
       "title": "Velikost přílohy překročila limit",
-      "message": "Limit pro velikost přílohy je [{{actualSize}}] bytů."
+      "message": "Limit pro velikost přílohy je [{{actualSize}}]."
     },
     "NOTIFICATION_TEMPLATE_XML_FILE_NOT_FOUND": {
       "title": "Šablona nebyla nalezena",
@@ -7060,6 +7060,50 @@
     "IMPORT_IS_ALREADY_RUNNING": {
       "title": "Tento import je již spuštěn!",
       "message": "Stejnou importní úlohu nelze spustit dvakrát!"
+    },
+    "EXPORT_ZIP_FAILED": {
+      "title": "Export selhal!",
+      "message": "Export ZIP souboru selhal!"
+    },
+    "IMPORT_ZIP_EXTRACTION_FAILED": {
+      "title": "Import selhal!",
+      "message": "Import ZIP souboru selhal!"
+    },
+    "IMPORT_VALIDATION_FAILED_NO_MANIFEST": {
+      "title": "Import selhal!",
+      "message": "Importovaná dávka neobsahuje manifest [{{manifest}}]!"
+    },
+    "IMPORT_FIELD_MUST_CONTAINS_UUID": {
+      "title": "Import selhal!",
+      "message": "Importovaná položka musí mít datový typ UUID, ale má [{{type}}]!"
+    },
+    "IMPORT_CONVERT_TO_DTO_FAILED": {
+      "title": "Import selhal!",
+      "message": "Nepodařilo se provést transformaci souboru [{{file}}] do objektu [{{dto}}]!"
+    },
+    "IMPORT_FIELD_EMBEDDED_ANNOTATION_MISSING": {
+      "title": "Import selhal!",
+      "message": "Nepodařilo se najít anotaci Embedded pro položku [{{field}}]!"
+    },
+    "IMPORT_FAILED_ROOT_NOT_FOUND": {
+      "title": "Import selhal!",
+      "message": "Nepodařilo se nalézt kořen pro objekt [{{dto}}]!"
+    },
+    "EXPORT_GENERATE_JSON_FAILED": {
+      "title": "Export selhal!",
+      "message": "Generování JSON souboru pro DTO [{{dto}}] selhalo!"
+    },
+    "EXPORT_IMPORT_IO_FAILED": {
+      "title": "Export/Import selhal!",
+      "message": "Nastala IO chyba!"
+    },
+    "EXPORT_IMPORT_REFLECTION_FAILED": {
+      "title": "Export/Import selhal!",
+      "message": "Nastala neočekávaná chyba!"
+    },
+    "EXPORT_IMPORT_FILTER_PARENT_FIELD_MUST_BE_UUID": {
+      "title": "Export/Import selhal!",
+      "message": "Rodičovská položka [{{field}}] musí mít datový typ UUID!"
     }
   },
   "validationError": {

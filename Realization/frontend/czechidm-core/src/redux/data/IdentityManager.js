@@ -252,18 +252,14 @@ export default class IdentityManager extends FormableEntityManager {
   /**
    * Upload image to BE
    */
-  uploadProfileImage(identityId, formData) {
+  uploadProfileImage(identityId, formData, cb) {
     const uiKey = this.resolveProfileUiKey(identityId);
-    return (dispatch, getState) => {
+    return (dispatch) => {
       dispatch(this.dataManager.requestData(uiKey));
       this.getService().uploadProfileImage(identityId, formData)
-        .then(() => {
-          const previousProfile = DataManager.getData(getState(), uiKey);
-          let profile = { imageUrl: null };
-          if (previousProfile) {
-            profile = { ...previousProfile, ...profile }; // prevent to clear loaded profile image
-          }
-          dispatch(this.dataManager.receiveData(uiKey, profile)); // enforce reload
+        .then((profile) => {
+          profile.imageUrl = null; // reload image will occurs after
+          dispatch(this.dataManager.receiveData(uiKey, profile, cb)); // enforce reload
           dispatch(this.downloadProfileImage(identityId));
         })
         .catch(error => {
@@ -322,15 +318,11 @@ export default class IdentityManager extends FormableEntityManager {
 
   deleteProfileImage(identityId) {
     const uiKey = this.resolveProfileUiKey(identityId);
-    return (dispatch, getState) => {
+    return (dispatch) => {
       dispatch(this.dataManager.requestData(uiKey));
       this.getService().deleteProfileImage(identityId)
-        .then(() => {
-          const previousProfile = DataManager.getData(getState(), uiKey);
-          let profile = { imageUrl: false };
-          if (previousProfile) {
-            profile = { ...previousProfile, ...profile }; // prevent to clear loaded profile image
-          }
+        .then((profile) => {
+          profile.imageUrl = false;
           dispatch(this.dataManager.receiveData(uiKey, profile));
         })
         .catch(error => {

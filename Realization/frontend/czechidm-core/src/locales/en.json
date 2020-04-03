@@ -6671,7 +6671,7 @@
     },
     "ATTACHMENT_SIZE_LIMIT_EXCEEDED": {
       "title": "Attachment size limit exceeded",
-      "message": "Attachment size limit is [{{actualSize}}] bytes."
+      "message": "Attachment size limit is [{{actualSize}}]."
     },
     "NOTIFICATION_TEMPLATE_XML_FILE_NOT_FOUND": {
       "title": "Template not found",
@@ -7008,6 +7008,50 @@
     "IMPORT_IS_ALREADY_RUNNING": {
       "title": "This import is already running!",
       "message": "The same import task cannot be run twice!"
+    },
+    "EXPORT_ZIP_FAILED": {
+      "title": "Export failed!",
+      "message": "Exporting ZIP file failed!"
+    },
+    "IMPORT_ZIP_EXTRACTION_FAILED": {
+      "title": "Import failed!",
+      "message": "Import ZIP souboru selhal!"
+    },
+    "IMPORT_VALIDATION_FAILED_NO_MANIFEST": {
+      "title": "Import failed!",
+      "message": "The imported batch does not contain the [{{manifest}}] manifest!"
+    },
+    "IMPORT_FIELD_MUST_CONTAINS_UUID": {
+      "title": "Import failed!",
+      "message": "The imported item must have a UUID data type but have [{{type}}]!"
+    },
+    "IMPORT_CONVERT_TO_DTO_FAILED": {
+      "title": "Import failed!",
+      "message": "Failed to transform file [{{file}}] into object [{{dto}}]!!"
+    },
+    "IMPORT_FIELD_EMBEDDED_ANNOTATION_MISSING": {
+      "title": "Import failed!",
+      "message": "Embedded annotation for [{{field}}] was not found!"
+    },
+    "IMPORT_FAILED_ROOT_NOT_FOUND": {
+      "title": "Import failed!",
+      "message": "Root for object [{{dto}}] was not found!"
+    },
+    "EXPORT_GENERATE_JSON_FAILED": {
+      "title": "Export selhal!",
+      "message": "Generating JSON file for DTO [{{dto}}] failed!"
+    },
+    "EXPORT_IMPORT_IO_FAILED": {
+      "title": "Export/Import failed!",
+      "message": "An IO error has occurred!"
+    },
+    "EXPORT_IMPORT_REFLECTION_FAILED": {
+      "title": "Export/Import failed!",
+      "message": "An unexpected error has occurred!"
+    },
+    "EXPORT_IMPORT_FILTER_PARENT_FIELD_MUST_BE_UUID": {
+      "title": "Export/Import failed!",
+      "message": "Parent field [{{field}}] must have a UUID data type!"
     }
   },
   "validationError": {

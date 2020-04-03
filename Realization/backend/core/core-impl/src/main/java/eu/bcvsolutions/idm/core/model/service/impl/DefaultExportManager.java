@@ -33,7 +33,6 @@ import eu.bcvsolutions.idm.core.ecm.api.service.AttachmentManager;
  * @author Vít Švanda
  *
  */
-
 @Service("exportManager")
 public class DefaultExportManager implements ExportManager {
 	
@@ -44,7 +43,7 @@ public class DefaultExportManager implements ExportManager {
 	private ObjectMapper mapper;
 	
 	@Override
-	public IdmExportImportDto exportDTO(BaseDto dto, IdmExportImportDto batch) {
+	public IdmExportImportDto exportDto(BaseDto dto, IdmExportImportDto batch) {
 		Assert.notNull(dto, "DTO cannot be null!");
 		Assert.notNull(batch, "Batch cannot be null!");
 		Assert.notNull(batch.getId(), "Batch ID cannot be null!");
@@ -56,7 +55,7 @@ public class DefaultExportManager implements ExportManager {
 			tempDirectory = batch.getTempDirectory();
 		}
 		
-		Path dtoTypePath = this.createDTODirectory(dto.getClass(), batch);
+		Path dtoTypePath = this.createDtoDirectory(dto.getClass(), batch);
 		Path dtoPath = null;
 		try {
 			dtoPath = Paths.get(dtoTypePath.toString(),
@@ -91,7 +90,7 @@ public class DefaultExportManager implements ExportManager {
 	}
 	
 	@Override
-	public Path createDTODirectory(Class<? extends BaseDto> dtoClass, IdmExportImportDto batch) {
+	public Path createDtoDirectory(Class<? extends BaseDto> dtoClass, IdmExportImportDto batch) {
 		Assert.notNull(dtoClass, "DTO class cannot be null!");
 		Assert.notNull(batch, "Batch cannot be null!");
 		Assert.notNull(batch.getId(), "Batch ID cannot be null!");

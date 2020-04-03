@@ -18,12 +18,9 @@ const formProjectionManager = new Managers.FormProjectionManager();
  */
 class ExampleIdentityProjection extends Basic.AbstractContent {
 
-
   constructor(props, context) {
     super(props, context);
     this.state = {
-      generatePassword: false,
-      generatePasswordShowLoading: false
     };
   }
 
@@ -266,8 +263,7 @@ function select(state, component) {
   return {
     identityProjection,
     showLoading: identityProjectionManager.isShowLoading(state, null, !identityProjection ? entityId : identityProjection.id),
-    _imageUrl: profile ? profile.imageUrl : null,
-    passwordChangeType: Managers.ConfigurationManager.getPublicValue(state, 'idm.pub.core.identity.passwordChange')
+    _imageUrl: profile ? profile.imageUrl : null
   };
 }
 

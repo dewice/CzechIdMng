@@ -27,6 +27,7 @@ const roleCatalogueManager = new RoleCatalogueManager();
 * Component for select roles by role catalogue
 * TODO: allow return object instead of ids (selectedRoles)
 * FIXME: use RoleTable component
+* FIXME: prevent import cycles => dont use filter component?
 *
 * @author Ondrej Kopr
 * @author Radek Tomiška
@@ -564,7 +565,7 @@ export default class RoleSelect extends Basic.AbstractFormComponent {
                     return _.includes(selectedRows, data[rowIndex].id) ? selectRowClass : Utils.Ui.getDisabledRowClass(data[rowIndex]);
                   }}
                   filter={
-                    <Filter onSubmit={ this.useFilter.bind(this) }>
+                    <Filter>
                       <Basic.AbstractForm ref="filterForm">
                         <Basic.Row className="last">
                           <Basic.Col lg={ 4 }>
@@ -584,6 +585,7 @@ export default class RoleSelect extends Basic.AbstractFormComponent {
                           </Basic.Col>
                           <Basic.Col lg={ 3 } className="text-right">
                             <Filter.FilterButtons
+                              useFilter={ this.useFilter.bind(this) }
                               cancelFilter={ this.cancelFilter.bind(this) }
                               showIcon
                               showText={ false }/>

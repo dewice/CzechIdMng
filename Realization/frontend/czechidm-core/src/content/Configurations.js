@@ -312,7 +312,7 @@ class Configurations extends Advanced.AbstractTableContent {
             ref="table"
             uiKey={ uiKey }
             manager={ this.getManager()}
-            showRowSelection={ manager.canDelete() }
+            showRowSelection
             rendered={ !detail.show }
             filter={
               <Advanced.Filter onSubmit={this.useFilter.bind(this)}>

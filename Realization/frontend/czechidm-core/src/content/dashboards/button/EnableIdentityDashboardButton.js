@@ -64,12 +64,9 @@ class EnableIdentityDashboardButton extends Advanced.AbstractIdentityDashboardBu
     });
   }
 
-  renderContent() {
+  renderConfirm() {
     return (
-      <span>
-        { super.renderContent() }
-        <Basic.Confirm ref="confirm-enable" level="success" />
-      </span>
+      <Basic.Confirm ref="confirm-enable" level="success" />
     );
   }
 }

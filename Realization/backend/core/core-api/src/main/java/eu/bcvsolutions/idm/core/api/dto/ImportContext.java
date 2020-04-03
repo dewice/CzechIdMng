@@ -75,13 +75,13 @@ public class ImportContext {
 		return this;
 	}
 
-	public ImportContext setImportLRT(AbstractLongRunningTaskExecutor<OperationResult> importTaskExecutor) {
+	public ImportContext setImportTaskExecutor(AbstractLongRunningTaskExecutor<OperationResult> importTaskExecutor) {
 		this.importTaskExecutor = importTaskExecutor;
 		
 		return this;
 	}
 
-	public AbstractLongRunningTaskExecutor<OperationResult> getImportLRT() {
+	public AbstractLongRunningTaskExecutor<OperationResult> getImportTaskExecutor() {
 		return this.importTaskExecutor;
 	}
 

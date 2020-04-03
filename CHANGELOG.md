@@ -11,6 +11,9 @@ All notable changes to this project will be documented in this file.
 - [#2107](https://redmine.czechidm.com/issues/2107) - Default method implementation was added into filter interfaces ``CorrelationFilter``, ``FormableFilter``, ``ModifiedFromFilter``, ``ExternalIdentifiableFilter``, ``ModifiedFromFilter``, ``ModifiedTillFilter``, ``CreatedFromFilter``, ``CreatedTillFilter``. Filter interfaces reuse ``DataFilter`` functionality now. If you are using this interface in your custom module, check ``DataFilter`` superclass is used too. All auditable entities can be found by new filters (created and modified form / till - filters are registered automatically).
 - [#2105](https://redmine.czechidm.com/issues/2105) - Loading eav attributes with owner entity support permissions now. If you are override method ``AbstractFormableService#getFormInstances(DTO)`` in your custom module, then add new parameter with permissions =>
 ``AbstractFormableService#getFormInstances(DTO, BasePermission...)`` init method definition. Method usage is backward compatible.
+- [#2164](https://redmine.czechidm.com/issues/2164) - method ``PrivateIdentityConfiguration#isFormAttributesSecured`` is deprecated. Secured identity attributes will be supported only in future version. This configuration will be removed in the next version.
+- [#2164](https://redmine.czechidm.com/issues/2164) - new method ``renderConfirm`` was added to frontend component ``AbstractIdentityDashboardButton``. **Use this method for your custom dashboard button, if button needs to show confirm dialog**. Confirm dialog cannot be closed otherwise, if it's rendered inside button content.
+
 ## [10.1.0]
 
 - [#1711](https://redmine.czechidm.com/issues/1711) - Warning about leading and trailing whitespaces filled in form inputs will be shown automatically.

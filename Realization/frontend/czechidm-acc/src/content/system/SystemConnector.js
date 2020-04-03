@@ -317,15 +317,6 @@ class SystemConnectorContent extends Basic.AbstractContent {
     const _showLoading = showLoading || this.props._showLoading;
     const _availableConnectors = this._getConnectorOptions(availableFrameworks, availableRemoteFrameworks, entity);
 
-    const attrLink = optionsFormInstance != null ?
-      <Link
-        style={{ marginRight: 5 }}
-        to={`/form-definitions/${encodeURIComponent(optionsFormInstance.definition.id)}/attributes`}
-        title={this.i18n('operationOptionsConfiguration.attributes')}>
-        {this.i18n('operationOptionsConfiguration.attributes')}
-      </Link>
-      : null;
-
     let pickConnector = null;
     if (entity && entity.connectorKey) {
       pickConnector = _.find(_availableConnectors, { value: entity.connectorKey.fullName });
@@ -347,7 +338,7 @@ class SystemConnectorContent extends Basic.AbstractContent {
       content = (
         <Basic.Tabs activeKey={ activeKey } onSelect={ this._onChangeSelectTabs.bind(this) }>
           <Basic.Tab eventKey={ 1 } title={ this.i18n('header') } className="bordered">
-            <form style={{ marginRight: 15, marginLeft: 15, paddingTop: 10}} onSubmit={this.save.bind(this, false)}>
+            <form style={{ marginRight: 15, marginLeft: 15, paddingTop: 10}} onSubmit={ this.save.bind(this, false) }>
               <Advanced.EavForm
                 ref="eav"
                 formInstance={ formInstance }
@@ -358,8 +349,8 @@ class SystemConnectorContent extends Basic.AbstractContent {
                   type="submit"
                   level="success"
                   showLoadingIcon
-                  showLoadingText={this.i18n('button.saving')}>
-                  {this.i18n('button.save')}
+                  showLoadingText={ this.i18n('button.saving') }>
+                  { this.i18n('button.save') }
                 </Basic.Button>
               </Basic.PanelFooter>
             </form>
@@ -394,13 +385,25 @@ class SystemConnectorContent extends Basic.AbstractContent {
                 readOnly={ !Managers.SecurityManager.hasAuthority('SYSTEM_UPDATE') }
                 useDefaultValue/>
               <Basic.PanelFooter rendered={ Managers.SecurityManager.hasAuthority('SYSTEM_UPDATE') } className="marginable">
-                { attrLink }
+                {
+                  !optionsFormInstance
+                  ||
+                  <Basic.Button
+                    level="link"
+                    onClick={ () => {
+                      this.context.history.push(`/form-definitions/${ encodeURIComponent(optionsFormInstance.definition.id) }/attributes`);
+                    }}
+                    title={ this.i18n('operationOptionsConfiguration.attributes') }
+                    titlePlacement="bottom">
+                    { this.i18n('operationOptionsConfiguration.attributes') }
+                  </Basic.Button>
+                }
                 <Basic.Button
                   type="submit"
                   level="success"
                   showLoadingIcon
-                  showLoadingText={this.i18n('button.saving')}>
-                  {this.i18n('button.save')}
+                  showLoadingText={ this.i18n('button.saving') }>
+                  { this.i18n('button.save') }
                 </Basic.Button>
               </Basic.PanelFooter>
             </form>

@@ -54,10 +54,19 @@ export default class Filter extends Basic.AbstractContextComponent {
   }
 
   render() {
-    const { rendered, showloading } = this.props;
-    if (!rendered || showloading) {
+    const { rendered, showLoading, embedded } = this.props;
+    if (!rendered || showLoading) {
       return null;
     }
+    // embedded filter without form wrapper
+    if (embedded) {
+      return (
+        <Basic.Div className="advanced-filter">
+          { this.props.children }
+        </Basic.Div>
+      );
+    }
+    // standalone filter
     return (
       <form onSubmit={ this.useFilter.bind(this) } className="advanced-filter">
         { this.props.children }
@@ -97,10 +106,15 @@ Filter.propTypes = {
   /**
    * Submit function
    */
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func,
+  /**
+   * Embedded filter (inside another form or filter).
+   */
+  embedded: PropTypes.bool
 };
 Filter.defaultProps = {
   ...Basic.AbstractContextComponent.defaultProps,
+  embedded: false
 };
 
 Filter.ToogleButton = FilterToogleButton;

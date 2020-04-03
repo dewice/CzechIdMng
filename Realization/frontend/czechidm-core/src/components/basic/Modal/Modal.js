@@ -38,7 +38,7 @@ export default class BasicModal extends AbstractComponent {
   }
 
   render() {
-    const { rendered, bsSize, showLoading, onEnter, ...others } = this.props;
+    const { rendered, bsSize, showLoading, onEnter, enforceFocus, container, ...others } = this.props;
     if (!rendered) {
       return null;
     }
@@ -47,7 +47,7 @@ export default class BasicModal extends AbstractComponent {
     }
     // disabled enforceFocus - input in popover cannot be selected otherwise
     return (
-      <Modal onEnter={ this._onEnter.bind(this, onEnter) } { ...others } enforceFocus={ false }>
+      <Modal onEnter={ this._onEnter.bind(this, onEnter) } enforceFocus={ enforceFocus } container={ container } { ...others } >
         {
           showLoading
           ?
@@ -84,7 +84,8 @@ BasicModal.propTypes = {
 
 BasicModal.defaultProps = {
   ...AbstractComponent.defaultProps,
-  bsSize: 'default'
+  bsSize: 'default',
+  enforceFocus: false
 };
 
 /**

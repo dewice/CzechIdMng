@@ -8,7 +8,14 @@ import eu.bcvsolutions.idm.core.api.dto.IdmExportImportDto;
 import eu.bcvsolutions.idm.core.api.dto.ImportContext;
 import eu.bcvsolutions.idm.core.api.entity.OperationResult;
 import eu.bcvsolutions.idm.core.scheduler.api.service.AbstractLongRunningTaskExecutor;
+import eu.bcvsolutions.idm.core.security.api.domain.BasePermission;
 
+/**
+ * Import manager
+ * 
+ * @author Vít Švanda
+ *
+ */
 public interface ImportManager {
 	
 	/**
@@ -17,9 +24,10 @@ public interface ImportManager {
 	 * @param name
 	 * @param fileName
 	 * @param inputStream
+	 * @param permission
 	 * @return
 	 */
-	IdmExportImportDto uploadImport(String name, String fileName, InputStream inputStream);
+	IdmExportImportDto uploadImport(String name, String fileName, InputStream inputStream, BasePermission... permission);
 
 	/**
 	 * Execute import batch (running import LRT)

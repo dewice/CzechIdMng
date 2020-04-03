@@ -102,7 +102,7 @@ public class DefaultSysSchemaObjectClassService extends AbstractReadWriteDtoServ
 		filter.setObjectClassId(id);
 		List<SysSchemaAttributeDto> schemaAttributes = schemaAttributeService.find(filter, null).getContent();
 		if (schemaAttributes.isEmpty()) {
-			schemaAttributeService.export(UUID.fromString(ExportManager.BLANK_UUID), batch);
+			schemaAttributeService.export(ExportManager.BLANK_UUID, batch);
 		}
 		schemaAttributes.forEach(schemaAttribute -> {
 			schemaAttributeService.export(schemaAttribute.getId(), batch);

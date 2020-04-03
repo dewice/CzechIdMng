@@ -360,7 +360,7 @@ public class DefaultIdmFormDefinitionService
 		List<IdmFormAttributeDto> attributes = formAttributeService.find(systemMappingFilter, null).getContent();
 
 		if (attributes.isEmpty()) {
-			formAttributeService.export(UUID.fromString(ExportManager.BLANK_UUID), batch);
+			formAttributeService.export(ExportManager.BLANK_UUID, batch);
 		}
 		attributes.forEach(mapping -> {
 			formAttributeService.export(mapping.getId(), batch);

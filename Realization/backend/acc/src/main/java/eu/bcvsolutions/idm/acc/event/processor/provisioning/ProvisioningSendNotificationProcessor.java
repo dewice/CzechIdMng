@@ -92,6 +92,7 @@ public class ProvisioningSendNotificationProcessor extends AbstractEntityEventPr
 							.addParameter("systemName", system.getName())
 							.addParameter("uid", uid)
 							.addParameter("password", password)
+							.addParameter("identity", identity)
 							.build(),
 							identity);
 

@@ -1,7 +1,6 @@
 package eu.bcvsolutions.idm.ic.service.api;
 
 import java.util.List;
-import java.util.Map;
 
 import eu.bcvsolutions.idm.core.security.api.domain.GuardedString;
 import eu.bcvsolutions.idm.ic.api.IcAttribute;
@@ -116,6 +115,5 @@ public interface IcConnectorService {
 	 */
 	IcConnector getConnectorInstance(IcConnectorInstance connectorInstance,
 			IcConnectorConfiguration connectorConfiguration);
-
-
+	
 }

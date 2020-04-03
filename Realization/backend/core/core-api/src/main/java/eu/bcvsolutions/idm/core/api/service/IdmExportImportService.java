@@ -16,6 +16,12 @@ public interface IdmExportImportService extends
 	ReadWriteDtoService<IdmExportImportDto, IdmExportImportFilter>,
 	AuthorizableService<IdmExportImportDto> {
 
+	/**
+	 * Download data (zip) from the batch.
+	 * 
+	 * @param batch
+	 * @return
+	 */
 	InputStream download(IdmExportImportDto batch);
 
 }

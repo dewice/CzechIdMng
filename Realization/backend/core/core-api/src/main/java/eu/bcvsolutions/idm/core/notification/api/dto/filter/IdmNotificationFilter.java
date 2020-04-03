@@ -28,6 +28,7 @@ public class IdmNotificationFilter extends QuickFilter {
 	private UUID parent;
 	private String topic;
 	private UUID templateId;
+	private UUID identitySender;
 
 	public String getSender() {
 		return sender;
@@ -133,5 +134,17 @@ public class IdmNotificationFilter extends QuickFilter {
 		this.templateId = templateId;
 	}
 	
-	
+	/**
+	 * @return identitySender
+	 */
+	public UUID getIdentitySender() {
+		return identitySender;
+	}
+
+	/**
+	 * @param identitySender
+	 */
+	public void setIdentitySender(UUID identitySender) {
+		this.identitySender = identitySender;
+	}	
 }

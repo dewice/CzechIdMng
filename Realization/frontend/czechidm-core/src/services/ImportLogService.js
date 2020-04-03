@@ -57,7 +57,7 @@ export default class ImportLogService extends AbstractService {
       .setFilter('roots', true)
       .clearSort()
       .setSort('type', 'asc')
-      .setSize(50);
+      .setSize(25);
   }
 
   /**
@@ -65,6 +65,6 @@ export default class ImportLogService extends AbstractService {
    */
   getTreeSearchParameters() {
     return super.getDefaultSearchParameters().setName(SearchParameters.NAME_QUICK).clearSort().setSort('type', 'asc')
-      .setSize(100);
+      .setSize(50);
   }
 }

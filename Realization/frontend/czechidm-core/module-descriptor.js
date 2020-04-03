@@ -1522,6 +1522,7 @@ module.exports = {
         labelKey: 'content.identity.profile-setting.header',
         icon: 'fa:cog',
         modal: 'profile-modal',
+        access: [ { type: 'HAS_ANY_AUTHORITY', authorities: ['PROFILE_READ'] } ],
         order: 800
       },
       {

@@ -482,7 +482,7 @@ public abstract class AbstractReadDtoService<DTO extends BaseDto, E extends Base
 		// Workaround - I need to use BLANK UUID (UUID no exists in DB), because I have
 		// to ensure add all DTO types (in full deep) in correct order (even when no child entity
 		// exists (no schema, no sync ...)).
-		if (UUID.fromString(ExportManager.BLANK_UUID).equals(id)) {
+		if (ExportManager.BLANK_UUID.equals(id)) {
 			exportDescriptorDto = new ExportDescriptorDto(this.getDtoClass());
 		} else {
 			DTO export = internalExport(id);

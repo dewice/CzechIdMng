@@ -5,8 +5,10 @@ import java.util.stream.Collectors;
 
 import javax.persistence.PersistenceException;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
-import org.springframework.web.multipart.MultipartException;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableMap;
@@ -30,6 +31,7 @@ import eu.bcvsolutions.idm.core.api.exception.CoreException;
 import eu.bcvsolutions.idm.core.api.exception.DefaultErrorModel;
 import eu.bcvsolutions.idm.core.api.exception.ErrorModel;
 import eu.bcvsolutions.idm.core.api.exception.ResultCodeException;
+import eu.bcvsolutions.idm.core.api.service.ConfigurationService;
 import eu.bcvsolutions.idm.core.api.utils.ExceptionUtils;
 import eu.bcvsolutions.idm.core.security.exception.IdmAuthenticationException;
 
@@ -43,6 +45,8 @@ import eu.bcvsolutions.idm.core.security.exception.IdmAuthenticationException;
 public class ExceptionControllerAdvice {
 
 	private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(ExceptionControllerAdvice.class);
+	
+	@Autowired private ConfigurationService configurationService;
 	
 	@ExceptionHandler(ResultCodeException.class)
     ResponseEntity<ResultModels> handle(ResultCodeException ex) {
@@ -163,10 +167,21 @@ public class ExceptionControllerAdvice {
 	 * @return error model
 	 * @since 10.2.0
 	 */
-	@ExceptionHandler(MultipartException.class)
+	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	ResponseEntity<ResultModels> handle(MaxUploadSizeExceededException ex) {
+		long maxUploadSize = ex.getMaxUploadSize();
+		//
+		String effectiveMaxUploadSize;
+		if (maxUploadSize <= 0) {
+			effectiveMaxUploadSize = configurationService.getValue(
+					"spring.servlet.multipart.max-file-size", 
+					String.valueOf(maxUploadSize)); // -1 as default
+		} else {
+			effectiveMaxUploadSize = FileUtils.byteCountToDisplaySize(maxUploadSize);
+		}
+		//
 		ErrorModel errorModel = new DefaultErrorModel(CoreResultCode.ATTACHMENT_SIZE_LIMIT_EXCEEDED, ex.getMessage(),
-				ImmutableMap.of("actualSize", String.valueOf(ex.getMaxUploadSize())));
+				ImmutableMap.of("actualSize", effectiveMaxUploadSize));
 		LOG.warn("[" + errorModel.getId() + "] ", ex);
         return new ResponseEntity<>(new ResultModels(errorModel), new HttpHeaders(), errorModel.getStatus());
     }

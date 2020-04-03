@@ -264,7 +264,7 @@ public class DefaultSysProvisioningBreakConfigService extends
 		List<SysProvisioningBreakRecipientDto> recipients = breakRecipientService
 				.find(provisioningBreakRecipientFilter, null).getContent();
 		if (recipients.isEmpty()) {
-			breakRecipientService.export(UUID.fromString(ExportManager.BLANK_UUID), batch);
+			breakRecipientService.export(ExportManager.BLANK_UUID, batch);
 		}
 		recipients.forEach(breakConfig -> {
 			breakRecipientService.export(breakConfig.getId(), batch);

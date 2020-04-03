@@ -33,9 +33,9 @@ public class IdmProfileDto extends AbstractDto  {
 	private String preferredLanguage;
 	@ApiModelProperty(notes = "Side menu will be collapsed, icons will be shown only.")
 	private boolean navigationCollapsed;
-	@ApiModelProperty(notes = "Tables will show given count of records by default, default application setting will be used otherwise.")
-	private boolean systemInformation;
 	@ApiModelProperty(notes = "Show internal entity identifiers, user transactions, logs and other system information.")
+	private boolean systemInformation;
+	@ApiModelProperty(notes = "Tables will show given count of records by default, default application setting will be used otherwise.")
 	private Integer defaultPageSize;
 
 	public IdmProfileDto() {

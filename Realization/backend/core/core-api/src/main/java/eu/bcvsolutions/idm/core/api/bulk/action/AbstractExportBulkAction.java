@@ -39,6 +39,7 @@ import eu.bcvsolutions.idm.core.ecm.api.dto.IdmAttachmentDto;
 import eu.bcvsolutions.idm.core.ecm.api.entity.AttachableEntity;
 import eu.bcvsolutions.idm.core.ecm.api.service.AttachmentManager;
 import eu.bcvsolutions.idm.core.scheduler.api.dto.IdmLongRunningTaskDto;
+import eu.bcvsolutions.idm.core.security.api.domain.IdmBasePermission;
 
 /**
  * Abstract export bulk operation
@@ -52,7 +53,7 @@ public abstract class AbstractExportBulkAction<DTO extends AbstractDto, F extend
 	@Autowired
 	private ExportManager exportManager;
 	@Autowired
-	private IdmExportImportService exportImportSerivce;
+	private IdmExportImportService exportImportService;
 	@Autowired
 	private AttachmentManager attachmentManager;
 	@Autowired
@@ -64,8 +65,6 @@ public abstract class AbstractExportBulkAction<DTO extends AbstractDto, F extend
 
 	private IdmExportImportDto batch = null;
 	private OperationResult itemException;
-	// Is here because this class is in API module (I don't see entity)
-	public static final String OWNER_TYPE = "eu.bcvsolutions.idm.core.model.entity.IdmExportImport";
 	// Name of export batch
 	public static final String PROPERTY_NAME = "name";
 	
@@ -82,11 +81,11 @@ public abstract class AbstractExportBulkAction<DTO extends AbstractDto, F extend
 			// Create directory for all exported classes. Some can be empty, its OK, we need
 			// empty folder for authoritative mode (for delete others items on target IdM).
 			batch.getExportOrder().forEach(descriptor -> {
-				exportManager.createDTODirectory(descriptor.getDtoClass(), batch);
+				exportManager.createDtoDirectory(descriptor.getDtoClass(), batch);
 			});
 
 			batch.getExportedDtos().forEach(extportDto -> {
-				exportManager.exportDTO(extportDto, batch);
+				exportManager.exportDto(extportDto, batch);
 			});
 
 			// Clear cache for next item
@@ -126,11 +125,11 @@ public abstract class AbstractExportBulkAction<DTO extends AbstractDto, F extend
 				attachment.setName(zipPath.toFile().getName());
 				attachment.setMimetype(ExportManager.APPLICATION_ZIP);
 				attachment.setInputData(inputStream);
-				attachment.setOwnerType(OWNER_TYPE);
+				attachment.setOwnerType(getLookupService().getOwnerType(IdmExportImportDto.class));
 
 				attachment = attachmentManager.saveAttachment(batch, attachment);
 				batch.setData(attachment.getId());
-				batch = exportImportSerivce.save(batch);
+				batch = exportImportService.save(batch);
 
 			} catch (IOException e) {
 				result = new OperationResult.Builder(OperationState.EXCEPTION)
@@ -207,7 +206,7 @@ public abstract class AbstractExportBulkAction<DTO extends AbstractDto, F extend
 		batchToExport.getExportOrder().addAll(batch.getExportOrder());
 		EntityUtils.copyAuditFields(batch, batchToExport);
 
-		exportManager.exportDTO(batchToExport, batch);
+		exportManager.exportDto(batchToExport, batch);
 		Path source = Paths.get(tempDirectory.toString(), IdmExportImportDto.class.getSimpleName(),
 				MessageFormat.format("{0}.{1}", batch.getId().toString(), ExportManager.EXTENSION_JSON));
 		Path target = Paths.get(tempDirectory.toString(), ExportManager.EXPORT_BATCH_FILE_NAME);
@@ -228,7 +227,7 @@ public abstract class AbstractExportBulkAction<DTO extends AbstractDto, F extend
 	}
 
 	protected IdmExportImportService getExportImportSerivce() {
-		return exportImportSerivce;
+		return exportImportService;
 	}
 
 	protected AttachmentManager getAttachmentManager() {
@@ -260,7 +259,8 @@ public abstract class AbstractExportBulkAction<DTO extends AbstractDto, F extend
 			batch.setExecutorName(this.getName());
 			batch.setLongRunningTask(getLongRunningTaskId());
 
-			batch = exportImportSerivce.save(batch);
+			batch = exportImportService.save(batch, IdmBasePermission.CREATE);
+
 		}
 	}
 

@@ -190,6 +190,10 @@ public class AbstractNotificationLogService<DTO extends IdmNotificationDto, E ex
 			Path<IdmMessage> message = root.get(IdmNotification_.message);
 			predicates.add(builder.equal(message.get(IdmMessage_.template).get(IdmNotificationTemplate_.id), templateId));
 		}
+		UUID identitySenderId = filter.getIdentitySender();
+		if(identitySenderId != null) {
+			predicates.add(builder.equal(root.get(IdmNotification_.identitySender).get(IdmIdentity_.id), identitySenderId));
+		}
 		return predicates;
 	}
 }

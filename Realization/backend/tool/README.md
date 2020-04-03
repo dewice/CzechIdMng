@@ -278,6 +278,8 @@ Build product only under current develop version in develop branch.
 java -jar idm-tool.jar --build
 ```
 
+Artefact ``idm.war`` with all product modules and frontend included is available in backend ``app`` module ``target`` folder.
+
 Maven ``install`` command is used under ``-Prelease`` profile, artifact will be installed into the local maven repository (=> usable as dependency for other module).
 
 **Build can be used before release for test purpose.** Target artefact will be the same a can be deployed to tomcat for test if needed.

@@ -19,6 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import java.time.ZonedDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -53,11 +56,12 @@ public abstract class IdmNotification extends AbstractEntity implements BaseNoti
 	
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "identity_sender_id", referencedColumnName = "id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
+	@NotFound(action = NotFoundAction.IGNORE)
 	@SuppressWarnings("deprecation") // jpa FK constraint does not work in hibernate 4
 	@org.hibernate.annotations.ForeignKey( name = "none" )
 	private IdmIdentity identitySender;
 
-	@OneToMany(mappedBy = "notification", cascade = CascadeType.ALL) // orphan removal is not necessary - notification can be added only
+	@OneToMany(mappedBy = "notification", cascade = CascadeType.ALL)
 	private List<IdmNotificationRecipient> recipients;
 
 	@Column(name = "sent")

@@ -331,14 +331,12 @@ public enum CoreResultCode implements ResultCode {
 	ROLE_FORM_ATTRIBUTE_CHANGE_DEF_NOT_ALLOWED(HttpStatus.BAD_REQUEST, "Change of form definition for role [%s] is not allowed, because for this role exists some IdmRoleFormAttribute. First delete them."),
 	// Export
 	EXPORT_GENERATE_JSON_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "JSON generating from DTO [%s] failed!"),
-	EXPORT_BATCH_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "Export batch [%s] ended with exception."),
 	// Import
 	IMPORT_ZIP_EXTRACTION_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "Extraction of ZIP import failed!"),
 	EXPORT_ZIP_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "Export - Creation of a ZIP failed!"),
 	IMPORT_VALIDATION_FAILED_NO_MANIFEST(HttpStatus.BAD_REQUEST, "Import validation failed. Manifest [%s] was not found!"),
 	IMPORT_CONVERT_TO_DTO_FAILED(HttpStatus.BAD_REQUEST, "Convert file [%s] to DTO [%s] failed!"),
 	IMPORT_IS_ALREADY_RUNNING(HttpStatus.BAD_REQUEST, "Import for [%s] cannot be execute, because is already running!"),
-	EXPORT_IMPORT_FILTER_IS_NOT_DATAFILTER(HttpStatus.BAD_REQUEST, "Export/import filter for DTO [%s] must be DataFilter, but is [%s]!"),
 	EXPORT_IMPORT_FILTER_PARENT_FIELD_MUST_BE_UUID(HttpStatus.BAD_REQUEST, "Export/import parent field [%s] must be UUID and not null, but is [%s]!"),
 	EXPORT_IMPORT_REFLECTION_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "Export/import reflection failed!"),
 	EXPORT_IMPORT_IO_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "Export/import IO exception occurred!"),

@@ -75,7 +75,16 @@ export default class AbstractIdentityDashboardButton extends Basic.AbstractConte
   /**
    * OnClick button function
    */
-  onClick() {
+  onClick(/* event */) {
+  }
+
+  /**
+   * Render confirm dialog if needed.
+   * Confirm dialog cannot be rendered inside button ro prevent event propagation.
+   *
+   * @since 10.2.0
+   */
+  renderConfirm() {
   }
 
   /**
@@ -104,19 +113,23 @@ export default class AbstractIdentityDashboardButton extends Basic.AbstractConte
 
   render() {
     return (
-      <Basic.Button
-        icon={ this.getIcon() }
-        level={ this.getLevel() }
-        className="btn-large"
-        onClick={ this.onClick.bind(this) }
-        style={{ height: 50, marginRight: 3, minWidth: 150 }}
-        title={ this.getTitle() }
-        titlePlacement="bottom"
-        rendered={ this.isRendered() === true }
-        showLoading={ this.isShowLoading() }
-        showLoadingIcon>
-        { this.renderContent() }
-      </Basic.Button>
+      <span>
+        { this.renderConfirm() }
+
+        <Basic.Button
+          icon={ this.getIcon() }
+          level={ this.getLevel() }
+          className="btn-large"
+          onClick={ (event) => this.onClick(event) }
+          style={{ height: 50, marginRight: 3, minWidth: 150 }}
+          title={ this.getTitle() }
+          titlePlacement="bottom"
+          rendered={ this.isRendered() === true }
+          showLoading={ this.isShowLoading() }
+          showLoadingIcon>
+          { this.renderContent() }
+        </Basic.Button>
+      </span>
     );
   }
 }

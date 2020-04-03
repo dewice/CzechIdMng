@@ -55,16 +55,6 @@ public class IdmIncompatibleRoleFilter extends DataFilter implements ExternalIde
 		data.set(PARAMETER_SUB_ID, subId);
 	}
 
-	@Override
-	public String getExternalId() {
-		return (String) data.getFirst(PROPERTY_EXTERNAL_ID);
-	}
-
-	@Override
-	public void setExternalId(String externalId) {
-		data.set(PROPERTY_EXTERNAL_ID, externalId);
-	}
-
 	public UUID getRoleId() {
 		return DtoUtils.toUuid(data.getFirst(PARAMETER_ROLE_ID));
 	}

@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 import eu.bcvsolutions.idm.core.api.domain.PropertyModuleDescriptor;
 import eu.bcvsolutions.idm.core.api.domain.ResultCode;
 import eu.bcvsolutions.idm.core.notification.api.dto.NotificationConfigurationDto;
-import eu.bcvsolutions.idm.core.security.api.domain.GroupPermission;
-import eu.bcvsolutions.idm.tool.domain.ToolGroupPermission;
 import eu.bcvsolutions.idm.tool.domain.ToolResultCode;
 
 /**
@@ -44,11 +42,6 @@ public class ToolModuleDescriptor extends PropertyModuleDescriptor {
 	public List<NotificationConfigurationDto> getDefaultNotificationConfigurations() {
 		List<NotificationConfigurationDto> configs = new ArrayList<>();
 		return configs;
-	}
-
-	@Override
-	public List<GroupPermission> getPermissions() {
-		return Arrays.asList(ToolGroupPermission.values());
 	}
 
 	@Override

@@ -161,5 +161,12 @@ public interface ReadDtoService<DTO extends BaseDto, F extends BaseFilter>
 	 */
 	DTO checkAccess(DTO dto, BasePermission... permission);
 
+	
+	/**
+	 * Exports DTO. DTO will be added to the given batch. 
+	 * 
+	 * @param id
+	 * @param batch
+	 */
 	void export(UUID id, IdmExportImportDto batch);
 }

@@ -65,14 +65,4 @@ public class IdmRoleCompositionFilter extends DataFilter implements ExternalIden
 	public void setRoleId(UUID roleId) {
 		data.set(PARAMETER_ROLE_ID, roleId);
 	}
-
-	@Override
-	public String getExternalId() {
-		return (String) data.getFirst(PROPERTY_EXTERNAL_ID);
-	}
-
-	@Override
-	public void setExternalId(String externalId) {
-		data.set(PROPERTY_EXTERNAL_ID, externalId);
-	}
 }

@@ -2,23 +2,30 @@ package eu.bcvsolutions.idm.core.api.service;
 
 import java.nio.file.Path;
 import java.util.Set;
+import java.util.UUID;
 
 import eu.bcvsolutions.idm.core.api.dto.BaseDto;
 import eu.bcvsolutions.idm.core.api.dto.ExportDescriptorDto;
 import eu.bcvsolutions.idm.core.api.dto.IdmExportImportDto;
 
+/**
+ * Export manager
+ * 
+ * @author Vít Švanda
+ *
+ */
 public interface ExportManager {
 
-	static final String EXTENSION_JSON = "json";
-	static final String EXTENSION_ZIP = "zip";
-	static final String APPLICATION_ZIP = "application/json";
-	static final String EXPORT_BATCH_FILE_NAME = "export-batch.json";
+	String EXTENSION_JSON = "json";
+	String EXTENSION_ZIP = "zip";
+	String APPLICATION_ZIP = "application/json";
+	String EXPORT_BATCH_FILE_NAME = "export-batch.json";
 	/**
 	 * Workaround - I need to use BLANK UUID (UUID no exists in DB), because I have
 	 * to ensure add all DTO types (in full deep) in correct order (even when no
 	 * child entity exists (no schema, no sync ...)).
 	 */
-	static final String BLANK_UUID = "00000000-0000-0000-0000-000000000000";
+	UUID BLANK_UUID = UUID.fromString("00000000-0000-0000-0000-000000000000");
 
 	/**
 	 * Exports given DTO to the JSON file to a temp.
@@ -27,7 +34,7 @@ public interface ExportManager {
 	 * @param batch
 	 * @return
 	 */
-	IdmExportImportDto exportDTO(BaseDto dto, IdmExportImportDto batch);
+	IdmExportImportDto exportDto(BaseDto dto, IdmExportImportDto batch);
 
 	/**
 	 * Sets authoritative mode for given DTO class. It means data (this DTO class)
@@ -70,7 +77,7 @@ public interface ExportManager {
 	 * @param batch
 	 * @return
 	 */
-	Path createDTODirectory(Class<? extends BaseDto> dtoClass, IdmExportImportDto batch);
+	Path createDtoDirectory(Class<? extends BaseDto> dtoClass, IdmExportImportDto batch);
 
 	/**
 	 * Get export descriptor form given DTO type from the batch.

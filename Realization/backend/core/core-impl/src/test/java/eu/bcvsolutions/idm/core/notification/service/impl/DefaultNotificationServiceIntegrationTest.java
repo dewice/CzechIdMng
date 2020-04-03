@@ -75,27 +75,30 @@ public class DefaultNotificationServiceIntegrationTest extends AbstractIntegrati
 
 	@Before
 	public void clear() {
-		// TODO: make test stateless!
+		// FIXME: make test stateless!
 		emailLogRepository.deleteAll();
 		notificationRepository.deleteAll();
 	}
 
 	@Test
-	@Transactional
 	public void testReferentialIntegrity() {
 		// delete recipients and children
 		NotificationConfigurationDto config = createConfig();
 		IdmNotificationTemplateDto template = createTestTemplate();
 		IdmIdentityDto identityOne = getHelper().createIdentity((GuardedString) null);
 		IdmIdentityDto identityTwo = getHelper().createIdentity((GuardedString) null);
+		IdmIdentityDto identitySender = getHelper().createIdentity((GuardedString) null);
 		List<IdmNotificationLogDto> notifications = notificationManager.send(
 				config.getTopic(),
-				new IdmMessageDto.Builder().setTemplate(template).build(), Lists.newArrayList(identityOne, identityTwo)
+				new IdmMessageDto.Builder().setTemplate(template).build(),
+				identitySender,
+				Lists.newArrayList(identityOne, identityTwo)
 				);
 		Assert.assertEquals(1, notifications.size());
 		//
 		IdmNotificationLogDto notification = notificationLogService.get(notifications.get(0));
 		Assert.assertNotNull(notification);
+		Assert.assertEquals(identitySender.getId(), notification.getIdentitySender());
 		IdmNotificationFilter notificationFilter = new IdmNotificationFilter();
 		notificationFilter.setParent(notification.getId());
 		List<IdmEmailLogDto> emails = emailLogService.find(notificationFilter, null).getContent();
@@ -115,6 +118,19 @@ public class DefaultNotificationServiceIntegrationTest extends AbstractIntegrati
 		Assert.assertTrue(emailRecipients.stream().anyMatch(r -> r.getIdentityRecipient().equals(identityOne.getId())));
 		Assert.assertTrue(emailRecipients.stream().anyMatch(r -> r.getIdentityRecipient().equals(identityTwo.getId())));
 		//
+		// sender is removed from notifications when sender identity was deleted
+		IdmNotificationFilter senderFilter = new IdmNotificationFilter();
+		senderFilter.setIdentitySender(identitySender.getId());
+		List<IdmNotificationLogDto> notificationLogDtos = notificationLogService.find(senderFilter, null).getContent();
+		Assert.assertFalse(notificationLogDtos.isEmpty());
+		notificationLogDtos.forEach(notif -> {
+			Assert.assertEquals(identitySender.getId(), notif.getIdentitySender());
+		});
+		identityService.delete(identitySender);
+		Assert.assertNull(identityService.get(identitySender.getId()));
+		//shouldn't throw despite the fact that identitySender contained in notificationLogDtos has been deleted
+		notificationLogDtos = notificationLogService.find(senderFilter, null).getContent();
+		
 		// delete parent notification
 		notificationLogService.delete(notification);
 		//

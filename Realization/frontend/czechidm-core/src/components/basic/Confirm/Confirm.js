@@ -86,7 +86,7 @@ class Confirm extends AbstractContextComponent {
     }
 
     return (
-      <div>
+      <span>
         <Modal show={show} showLoading={showLoading} onHide={this.closeModal.bind(this)}>
           <Modal.Header text={title} rendered={title !== undefined && title !== null} />
           <Modal.Body>
@@ -98,7 +98,7 @@ class Confirm extends AbstractContextComponent {
             <Button ref="yesButton" level={level} onClick={this.confirm.bind(this)}>{this.i18n('button.yes')}</Button>
           </Modal.Footer>
         </Modal>
-      </div>
+      </span>
     );
   }
 }

@@ -74,10 +74,14 @@ class Profile extends Basic.AbstractContent {
   }
 
   _getIdentityIdentifier() {
-    const { profile } = this.props;
+    const { profile, userContext } = this.props;
     //
     if (profile._embedded && profile._embedded.identity) {
       return profile._embedded.identity.username;
+    }
+    if (!profile.identity) {
+      // profile is not created yet => new will be created by logged identity
+      return userContext.username;
     }
     return profile.identity;
   }
@@ -112,6 +116,8 @@ class Profile extends Basic.AbstractContent {
     // if updated profile is logged identity profile => dispach changes
     this.context.store.dispatch(securityManager.setCurrentProfile(profile));
     this.addMessage({ level: 'success', message: this.i18n('message.success.update') });
+    // new profile can be created => nee need to set id into form
+    this.refs.form.setData(profile);
   }
 
   _supportedLanguageOptions() {
@@ -189,7 +195,14 @@ class Profile extends Basic.AbstractContent {
       formData.name = this.state.fileName;
       formData.append('fileName', this.state.fileName);
       //
-      this.context.store.dispatch(identityManager.uploadProfileImage(this._getIdentityIdentifier(), formData));
+      this.context.store.dispatch(identityManager.uploadProfileImage(this._getIdentityIdentifier(), formData, (profile, error) => {
+        if (error) {
+          this.addError(error);
+          return;
+        }
+        // new profile can be created => wee need to set id into form
+        this.refs.form.setData(profile);
+      }));
     });
     this._closeCropper();
   }

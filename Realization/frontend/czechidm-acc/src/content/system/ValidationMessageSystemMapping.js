@@ -34,7 +34,8 @@ export default class ValidationMessageSystemMapping extends Basic.AbstractFormCo
           <Basic.Alert level="warning" className="no-margin">
             <div>{this.i18n(`acc:content.system.mappingDetail.validation.${key}.message`)}</div>
             <div>{this.i18n(`acc:content.system.mappingDetail.validation.${key}.info`)}</div>
-          </Basic.Alert>);
+          </Basic.Alert>
+        );
       }
     }
     return validationMessage;
@@ -54,7 +55,7 @@ export default class ValidationMessageSystemMapping extends Basic.AbstractFormCo
       </div>
     );
   }
-  }
+}
 
 ValidationMessageSystemMapping.propTypes = {
   ...Basic.AbstractFormComponent.propTypes,

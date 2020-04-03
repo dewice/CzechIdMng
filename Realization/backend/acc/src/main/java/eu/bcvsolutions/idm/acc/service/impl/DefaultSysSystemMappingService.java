@@ -218,7 +218,7 @@ public class DefaultSysSystemMappingService
 		filter.setSystemMappingId(id);
 		List<SysSystemAttributeMappingDto> attributes = this.getAttributeMappingService().find(filter, null).getContent();
 		if (attributes.isEmpty()) {
-			this.getAttributeMappingService().export(UUID.fromString(ExportManager.BLANK_UUID), batch);
+			this.getAttributeMappingService().export(ExportManager.BLANK_UUID, batch);
 		}
 		attributes.forEach(systemAttributeMapping -> {
 					this.getAttributeMappingService().export(systemAttributeMapping.getId(), batch);
