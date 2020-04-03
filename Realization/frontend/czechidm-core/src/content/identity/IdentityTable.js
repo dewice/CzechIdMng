@@ -206,7 +206,7 @@ export class IdentityTable extends Advanced.AbstractTableContent {
         <Advanced.Table
           ref="table"
           uiKey={ uiKey }
-          prohibitedActions={prohibitedActions}
+          prohibitedActions={ prohibitedActions }
           manager={ identityManager }
           showRowSelection={ showRowSelection }
           filter={

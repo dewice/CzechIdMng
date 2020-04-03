@@ -616,7 +616,7 @@ class AdvancedTable extends Basic.AbstractContextComponent {
  * Removes prohibited actions.
  */
   _removeProhibitedActions(actions) {
-    const {prohibitedActions} = this.props;
+    const { prohibitedActions } = this.props;
 
     return actions.filter(action => {
       if (!prohibitedActions) {

@@ -44,7 +44,7 @@ export default class RoleIdentities extends Basic.AbstractContent {
         <IdentityTableComponent
           uiKey="role-identities-table"
           identityManager={ this.getManager() }
-          prohibitedActions={['identity-delete-bulk-action']}
+          prohibitedActions={[ 'identity-delete-bulk-action' ]}
           filterOpened={ false }
           forceSearchParameters={ forceSearchParameters }
           showAddButton={ false }
