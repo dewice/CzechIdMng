@@ -366,6 +366,14 @@ public enum CoreGroupPermission implements GroupPermission {
 			IdmBasePermission.READ, 
 			IdmBasePermission.CREATE, 
 			IdmBasePermission.UPDATE, 
+			IdmBasePermission.DELETE),
+	DELEGATIONDEFINITION(
+			IdmBasePermission.ADMIN, 
+			IdmBasePermission.COUNT, 
+			IdmBasePermission.AUTOCOMPLETE,
+			IdmBasePermission.READ, 
+			IdmBasePermission.CREATE, 
+			IdmBasePermission.UPDATE, 
 			IdmBasePermission.DELETE);
 	
 	// String constants could be used in pre / post authorize SpEl expressions
@@ -671,6 +679,14 @@ public enum CoreGroupPermission implements GroupPermission {
 	public static final String EXPORTIMPORT_CREATE = "EXPORTIMPORT" + BasePermission.SEPARATOR + "CREATE";
 	public static final String EXPORTIMPORT_UPDATE = "EXPORTIMPORT" + BasePermission.SEPARATOR + "UPDATE";
 	public static final String EXPORTIMPORT_DELETE = "EXPORTIMPORT" + BasePermission.SEPARATOR + "DELETE";
+	//
+	public static final String DELEGATIONDEFINITION_ADMIN = "DELEGATIONDEFINITION" + BasePermission.SEPARATOR + "ADMIN";
+	public static final String DELEGATIONDEFINITION_COUNT = "DELEGATIONDEFINITION" + BasePermission.SEPARATOR + "COUNT";
+	public static final String DELEGATIONDEFINITION_AUTOCOMPLETE = "DELEGATIONDEFINITION" + BasePermission.SEPARATOR + "AUTOCOMPLETE";
+	public static final String DELEGATIONDEFINITION_READ = "DELEGATIONDEFINITION" + BasePermission.SEPARATOR + "READ";
+	public static final String DELEGATIONDEFINITION_CREATE = "DELEGATIONDEFINITION" + BasePermission.SEPARATOR + "CREATE";
+	public static final String DELEGATIONDEFINITION_UPDATE = "DELEGATIONDEFINITION" + BasePermission.SEPARATOR + "UPDATE";
+	public static final String DELEGATIONDEFINITION_DELETE = "DELEGATIONDEFINITION" + BasePermission.SEPARATOR + "DELETE";
 	
 	private final List<BasePermission> permissions;
 
